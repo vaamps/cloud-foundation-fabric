@@ -121,7 +121,7 @@ variable "node_config_min_cpu_platform" {
 }
 
 variable "node_config_oauth_scopes" {
-  description = "Set of Google API scopes for the nodes service account. Include logging-write, monitoring, and storage-ro when using this variable."
+  description = "Set of Google API scopes for the nodes service account."
   type        = list(string)
   default     = ["logging-write", "monitoring", "monitoring-write", "storage-ro"]
 }
@@ -142,6 +142,12 @@ variable "node_config_service_account" {
   description = "Service account used for nodes."
   type        = string
   default     = null
+}
+
+variable "node_config_service_account_create" {
+  description = "Create and use ad hoc service account."
+  type        = bool
+  default     = false
 }
 
 variable "node_config_shielded_instance_config" {

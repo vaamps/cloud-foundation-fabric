@@ -14,6 +14,21 @@
  * limitations under the License.
  */
 
+locals {
+  service_account_email = (
+    var.node_config_service_account_create
+    ? try(google_service_account.service_account[0].email, null)
+    : var.node_config_service_account
+  )
+}
+
+resource "google_service_account" "service_account" {
+  count        = var.node_config_service_account_create ? 1 : 0
+  project      = var.project_id
+  account_id   = "tf-gke-${var.name}"
+  display_name = "Terraform GKE nodepool ${var.name}."
+}
+
 resource "google_container_node_pool" "nodepool" {
   provider = google-beta
 
@@ -39,7 +54,7 @@ resource "google_container_node_pool" "nodepool" {
     min_cpu_platform = var.node_config_min_cpu_platform
     oauth_scopes     = var.node_config_oauth_scopes
     preemptible      = var.node_config_preemptible
-    service_account  = var.node_config_service_account
+    service_account  = local.service_account_email
     tags             = var.node_config_tags
 
     dynamic guest_accelerator {

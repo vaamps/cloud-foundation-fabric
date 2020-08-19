@@ -18,3 +18,17 @@ output "name" {
   description = "Nodepool name."
   value       = google_container_node_pool.nodepool.name
 }
+
+output "service_account_email" {
+  description = "Service account email."
+  value       = local.service_account_email
+}
+
+output "service_account_iam_email" {
+  description = "Service account email."
+  value = (
+    local.service_account_email == null
+    ? null
+    : "serviceAccount:${local.service_account_email}"
+  )
+}

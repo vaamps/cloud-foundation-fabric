@@ -37,10 +37,11 @@ module "cluster-1-nodepool-1" {
 | *node_config_machine_type* | Nodes machine type. | <code title="">string</code> |  | <code title="">n1-standard-1</code> |
 | *node_config_metadata* | Metadata key/value pairs assigned to nodes. Set disable-legacy-endpoints to true when using this variable. | <code title="map&#40;string&#41;">map(string)</code> |  | <code title="">null</code> |
 | *node_config_min_cpu_platform* | Minimum CPU platform for nodes. | <code title="">string</code> |  | <code title="">null</code> |
-| *node_config_oauth_scopes* | Set of Google API scopes for the nodes service account. Include logging-write, monitoring, and storage-ro when using this variable. | <code title="list&#40;string&#41;">list(string)</code> |  | <code title="">["logging-write", "monitoring", "monitoring-write", "storage-ro"]</code> |
+| *node_config_oauth_scopes* | Set of Google API scopes for the nodes service account. | <code title="list&#40;string&#41;">list(string)</code> |  | <code title="">["logging-write", "monitoring", "monitoring-write", "storage-ro"]</code> |
 | *node_config_preemptible* | Use preemptible VMs for nodes. | <code title="">bool</code> |  | <code title="">null</code> |
 | *node_config_sandbox_config* | GKE Sandbox configuration. Needs image_type set to COS_CONTAINERD and node_version set to 1.12.7-gke.17 when using this variable. | <code title="">string</code> |  | <code title="">null</code> |
 | *node_config_service_account* | Service account used for nodes. | <code title="">string</code> |  | <code title="">null</code> |
+| *node_config_service_account_create* | Create and use ad hoc service account. | <code title="">bool</code> |  | <code title="">false</code> |
 | *node_config_shielded_instance_config* | Shielded instance options. | <code title="object&#40;&#123;&#10;enable_secure_boot          &#61; bool&#10;enable_integrity_monitoring &#61; bool&#10;&#125;&#41;">object({...})</code> |  | <code title="">null</code> |
 | *node_config_tags* | Network tags applied to nodes. | <code title="list&#40;string&#41;">list(string)</code> |  | <code title="">null</code> |
 | *node_count* | Number of nodes per instance group, can be updated after creation. Ignored when autoscaling is set. | <code title="">number</code> |  | <code title="">null</code> |
@@ -53,4 +54,6 @@ module "cluster-1-nodepool-1" {
 | name | description | sensitive |
 |---|---|:---:|
 | name | Nodepool name. |  |
+| service_account_email | Service account email. |  |
+| service_account_iam_email | Service account email. |  |
 <!-- END TFDOC -->
