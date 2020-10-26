@@ -45,3 +45,15 @@ output "ca_certificate" {
   value       = google_container_cluster.cluster.master_auth.0.cluster_ca_certificate
   sensitive   = true
 }
+   
+output "cluster_secondary_range_name" {
+  description = "Subnet secondary range name used for pods."
+  value       = google_container_cluster.cluster.ip_allocation_policy.0.cluster_secondary_range_name
+  sensitive   = true
+}
+   
+output "services_secondary_range_name " {
+  description = "Public certificate of the cluster (base64-encoded)."
+  value       = google_container_cluster.cluster.ip_allocation_policy.0.services_secondary_range_name 
+  sensitive   = true
+}
